@@ -19,6 +19,8 @@ export const handleBet = async (
     payout = betAmount * multiplier;
   }
 
+  /**  NB! An improvement for a live application using SQL/PostGress would be to
+       use Database locking to avoid race conditions on balance updates */
   const [settledBet] = await Promise.all([
     createBet(user, betAmount, chance, payout, win),
     updateUser(
